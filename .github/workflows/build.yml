@@ -30,10 +30,10 @@ jobs:
       - name: Conan version
         run: echo "${{ steps.conan.outputs.version }}"
 
-      - name: Install dependencies for MacOS
-        if: runner.os == 'macOS'
+      - name: Install dependencies
+        working-directory: ./build
         run: |
-          brew install conan
+          install conan ..
 
       - name: Create Build Environment & Configure Cmake
         # Some projects don't allow in-source building, so create a separate build directory
