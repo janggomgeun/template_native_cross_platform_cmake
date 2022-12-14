@@ -1,0 +1,43 @@
+name: MacOS
+
+on:
+  push:
+    branches: [main]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  unix:
+    name: ${{ matrix.buildname }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            buildname: "macos/clang"
+            triplet: x64-osx
+            compiler: clang_64
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Install Conan
+        id: conan
+        uses: turtlebrowser/get-conan@main
+
+      - name: Conan version
+        run: echo "${{ steps.conan.outputs.version }}"
+
+      - name: Install dependencies for MacOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install conan
+
+      - name: Create Build Environment & Configure Cmake
+        # Some projects don't allow in-source building, so create a separate build directory
+        # We'll use this as our working directory for all subsequent commands
+        run: |
+          cmake -B build                   \
+            -DCMAKE_BUILD_TYPE=$BUILD_TYPE
