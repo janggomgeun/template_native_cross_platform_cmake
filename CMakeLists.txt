@@ -30,10 +30,12 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
 
 find_package(spdlog REQUIRED)
+find_package(doctest REQUIRED)
 
 # add executable for the project
 add_executable(${PROJECT_NAME} 
   src/main.cpp
+  src/factorial/factorial.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -43,6 +45,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME} PUBLIC
   ${CONAN_LIBS}
   spdlog::spdlog
+  doctest::doctest 
 )
 
 target_compile_features(${PROJECT_NAME} 
