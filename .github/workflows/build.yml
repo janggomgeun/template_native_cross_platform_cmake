@@ -2,7 +2,7 @@ name: Build for windows, mac, and linux
 
 on:
   push:
-    branches: [build/workflow]
+    branches: [main, build/workflow]
   workflow_dispatch:
 
 env:
@@ -52,6 +52,10 @@ jobs:
           - os: macos-latest
             buildname: "macos/clang"
             triplet: x64-osx
+            compiler: clang_64
+          - os: ubuntu-20.04
+            buildname: "ubuntu-20.04/clang"
+            triplet: x64-linux
             compiler: clang_64
 
     steps:
