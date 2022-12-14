@@ -2,7 +2,7 @@ name: MacOS
 
 on:
   push:
-    branches: [workflow]
+    branches: [build/workflow]
 
 env:
   BUILD_TYPE: Release
