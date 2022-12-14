@@ -3,4 +3,4 @@ doctest/2.4.9
 spdlog/1.11.0
 
 [generators]
-cmake
+cmake_find_package

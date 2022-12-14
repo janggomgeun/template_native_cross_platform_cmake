@@ -27,10 +27,9 @@ message(STATUS "project name: ${PROJECT_NAME}, ${PROJECT_VERSION}")
 
 # cmake module resolutions
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
 
-# conan packages setup
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+find_package(spdlog REQUIRED)
 
 # add executable for the project
 add_executable(${PROJECT_NAME} 
@@ -43,6 +42,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
   ${CONAN_LIBS}
+  spdlog::spdlog
 )
 
 target_compile_features(${PROJECT_NAME} 
