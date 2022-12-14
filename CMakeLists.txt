@@ -1,23 +1,42 @@
 cmake_minimum_required(VERSION 3.0.0)
-project(template_cmake_cross_platform)
 
+# toolchain information
+message(STATUS "compiler flags:" ${CMAKE_CXX_COMPILE_FLAGS})
+message(STATUS "compiler cxx debug flags:" ${CMAKE_CXX_FLAGS_DEBUG})
+message(STATUS "compiler cxx release flags:" ${CMAKE_CXX_FLAGS_RELEASE})
+message(STATUS "compiler cxx min size flags:" ${CMAKE_CXX_FLAGS_MINSIZEREL})
+message(STATUS "compiler cxx flags:" ${CMAKE_CXX_FLAGS})
+
+# cmake settings
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# project description
+project(template_cmake_cross_platform)
+
+# options which are configurable by developers
+option(WITH_CXX_STD_17 ON)
+option(WITH_UNIT_TESTS ON)
+
+# project versioning
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 0)
 set(PROJECT_VERSION v${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
-message("project name: ${PROJECT_NAME}, version: ${PROJECT_VERSION}")
 
+message(STATUS "project name: ${PROJECT_NAME}, ${PROJECT_VERSION}")
+
+# cmake module resolutions
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+# conan packages setup
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-include(CTest)
-enable_testing()
-
+# add executable for the project
 add_executable(${PROJECT_NAME} 
   src/main.cpp
 )
+
 target_include_directories(${PROJECT_NAME} PUBLIC
   ${CONAN_INCLUDE_DIRS}
 )
@@ -27,9 +46,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 )
 
 target_compile_features(${PROJECT_NAME} 
-    PRIVATE cxx_std_17
+    PRIVATE 
+    cxx_std_17
 )
 
+# package
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
