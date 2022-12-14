@@ -57,6 +57,9 @@ target_compile_features(${PROJECT_NAME}
     cxx_std_17
 )
 
+include(ClangFormat)
+target_clangformat_setup(${PROJECT_NAME})
+
 # package
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
