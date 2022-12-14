@@ -30,6 +30,10 @@ jobs:
       - name: Conan version
         run: echo "${{ steps.conan.outputs.version }}"
 
+      - name: Create a build directory
+        run: |
+          mkdir build
+
       - name: Install dependencies
         working-directory: ./build
         run: |
