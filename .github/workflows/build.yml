@@ -2,7 +2,7 @@ name: Build for windows, mac, and linux
 
 on:
   push:
-    branches: [main, build/workflow]
+    branches: [main]
   workflow_dispatch:
 
 env:
@@ -43,7 +43,7 @@ jobs:
       - name: Build
         run: cmake --build build
 
-  macos:
+  unix:
     name: ${{ matrix.buildname }}
     runs-on: ${{ matrix.os }}
     strategy:
