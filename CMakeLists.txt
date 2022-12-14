@@ -14,8 +14,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(template_cmake_cross_platform)
 
 # options which are configurable by developers
-option(WITH_CXX_STD_17 ON)
-option(WITH_UNIT_TESTS ON)
+option(WITH_CXX_STD_17 "CXX STD 17" ON)
+option(WITH_UNIT_TESTS "Unit tests" ON)
 
 # project versioning
 set(PROJECT_VERSION_MAJOR 0)
@@ -46,6 +46,10 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${CONAN_LIBS}
   spdlog::spdlog
   doctest::doctest 
+)
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+  $<$<NOT:$<BOOL:${WITH_UNIT_TESTS}>>:DOCTEST_CONFIG_DISABLE=1>
 )
 
 target_compile_features(${PROJECT_NAME} 
