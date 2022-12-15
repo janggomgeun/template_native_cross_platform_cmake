@@ -1,6 +1,7 @@
 [requires]
 doctest/2.4.9
 spdlog/1.11.0
+clipp/1.2.3
 
 [generators]
 cmake_find_package

@@ -31,6 +31,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_BINARY_DIR}")
 
 find_package(spdlog REQUIRED)
 find_package(doctest REQUIRED)
+find_package(clipp REQUIRED)
 
 # add executable for the project
 add_executable(${PROJECT_NAME} 
@@ -46,6 +47,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${CONAN_LIBS}
   spdlog::spdlog
   doctest::doctest 
+  clipp::clipp 
 )
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
