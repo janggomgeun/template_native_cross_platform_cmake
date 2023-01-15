@@ -1,0 +1,11 @@
+name: Release
+
+on:
+  # push:
+  #   branches: [main]
+  workflow_dispatch:
+
+env:
+jobs:
+  # todo versioning
+  # todo package
