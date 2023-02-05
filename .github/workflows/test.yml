@@ -5,5 +5,10 @@ on:
   #   branches: [main]
   workflow_dispatch:
 
-env:
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo Test

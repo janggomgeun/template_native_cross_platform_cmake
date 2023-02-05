@@ -5,7 +5,10 @@ on:
   #   branches: [main]
   workflow_dispatch:
 
-env:
 jobs:
-  # todo versioning
-  # todo package
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo Release
